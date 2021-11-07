@@ -1,0 +1,277 @@
+Домашнее задание к занятию «2.1. Системы контроля версий.»
+Задание №1 – Создать и настроить репозиторий для дальнейшей работы на курсе.
+В рамках курса мы будем писать скрипты и создавать конфигурации для различных систем, которые необходимо сохранять для будущего использования. Поэтому первым делом надо создать и настроить локальный репозиторий, после чего добавить удаленный репозиторий в github.
+
+Создайте репозиторий и первый коммит:
+
+Зарегистрируйте аккаунт на https://github.com/ (если вы предпочитаете другое хранилище для репозитория, можно использовать его).
+https://github.com/AvdeevVK
+
+Создайте публичный репозиторий, который будете использовать дальше на протяжении всего курса, желательное название devops-netology. 
+Обязательно поставьте галочку Initialize this repository with a README. Диалог создания репозитория
+https://github.com/AvdeevVK/devops-netology
+
+Склонируйте репозиторий, используя https протокол (git clone ...) Клонирование репозитория
+git clone https://github.com/AvdeevVK/devops-netology git02_clone
+
+Перейдите в каталог с клоном репозитория (cd devops-netology)
+Произведите первоначальную настройку git, указав свое настоящее имя (пожалуста, используйте настоящие имена, нам так будет проще общаться) и 
+email (git config --global user.name и git config --global user.email johndoe@example.com).
+
+root@avk-VirtualBox:~/git02_clone# git config --list --show-origin
+file:/root/.gitconfig   user.name=AvdeevVK
+file:/root/.gitconfig   user.email=vladimir.avdeev@rt.ru
+file:.git/config        core.repositoryformatversion=0
+file:.git/config        core.filemode=true
+file:.git/config        core.bare=false
+file:.git/config        core.logallrefupdates=true
+file:.git/config        remote.origin.url=https://github.com/AvdeevVK/devops-netology
+file:.git/config        remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config        branch.main.remote=origin
+file:.git/config        branch.main.merge=refs/heads/main
+
+Выполните команду git status и запомните результат.
+Отредактируйте файл README.md любым удобным способом, тем самым переведя файл в состояние Modified.
+Еще раз выполните git status и продолжайте проверять вывод этой команды после каждого последующего шага.
+Давйте теперь посмотрим изменения в файле README.md выполнив команды git diff и git diff --staged.
+Переведите файл в состояние staged (или как говорят просто добавьте файл в коммит) командой git add README.md.
+И еще раз выполните команды git diff и git diff --staged. Поиграйте с изменениями и этими коммандами, чтобы четко понять что и когда они отображают.
+diff --git a/README.md b/README.md
+index e1afcf3..6ec3ce9 100644
+--- a/README.md
++++ b/README.md
+@@ -10,3 +10,7 @@
+Возможны множественные итерации цикла. Возможны ситуации когда клиент будет общаться напрямую с разработчиком или тестировщиком. DevOps создаёт технологическую площадку для выше приведённого алгоритма, оптимизирует взаимосвязи между Клиентом-Менеджером-Разработчиком-Тестировщиком-DevOps и создаёт слепки производимой работы на всех шагах, с целью возврата к нужному шагу алгоритма.
++.gitignore
+
+
+diff --git a/*.tfstate b/*.tfstate
+new file mode 100644
+index 0000000..e69de29
+diff --git a/*.tfstate, b/*.tfstate,
+new file mode 100644
+index 0000000..e69de29
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..e69de29
+root@avk-VirtualBox:~/git02_clone# git diff
+diff --git a/README.md b/README.md
+index e1afcf3..6ec3ce9 100644
+--- a/README.md
++++ b/README.md
+@@ -10,3 +10,7 @@
+    1. Менеджер проверяет и передаёт готовый продукт клиенту, если он его устраивает результат то процесс завершён, если нет то продукт возращается на доработку разработчикункт 3).
+
+
+Теперь можно сделать коммит git commit -m 'First commit'.
+И еще раз посмотреть выводы команд git status, git diff и git diff --staged.
+Создадим файлы .gitignore и второй коммит:
+Создайте файл .gitignore (обратите внимание на точку в начале файла), проверьте его статус сразу после создания.
+Добавьте файл .gitignore в следующий коммит (git add...).
+
+root@avk-VirtualBox:~/git# git status
+На ветке master
+Изменения, которые будут включены в коммит:
+  (используйте «git restore --staged <файл>…», чтобы убрать из индекса)
+        новый файл:    README
+        изменено:      README.md
+
+Изменения, которые не в индексе для коммита:
+  (используйте «git add <файл>…», чтобы добавить файл в индекс)
+  (используйте «git restore <файл>…», чтобы отменить изменения в рабочем каталоге)
+        изменено:      README.md
+
+
+На ветке main
+Ваша ветка обновлена в соответствии с «origin/main».
+
+Изменения, которые будут включены в коммит:
+  (используйте «git restore --staged <файл>…», чтобы убрать из индекса)
+        новый файл:    .gitignore
+
+Неотслеживаемые файлы:
+  (используйте «git add <файл>…», чтобы добавить в то, что будет включено в коммит)
+        gitignore
+
+
+На одном из следующих блоков мы будем изучать Terraform, давайте сразу же создадим соотвествующий каталог terraform и внутри этого каталога файл .gitignore по этому примеру: 
+https://github.com/github/gitignore/blob/master/Terraform.gitignore.
+В файле README.md опишите своими словами какие файлы будут проигнорированы в будущем благодаря добавленному .gitignore.
+Закоммитте все новые и измененные файлы. Комментарий к коммиту должен быть Added gitignore.
+https://github.com/AvdeevVK/devops-netology/blob/main/netology.tf
+
+Экспериментируем с удалением и перемещением файлов (третий и четвертый коммит).
+Создайте файлы will_be_deleted.txt (с текстом will_be_deleted) и will_be_moved.txt (с текстом will_be_moved) и закоммите их с комментарием Prepare to delete and move.
+В случае необходимости обратитесь к официальной документации: https://git-scm.com/book/ru/v2/Основы-Git-Запись-изменений-в-репозиторий , 
+здесь подробно описано как выполнить последующие шаги.
+Удалите файл will_be_deleted.txt с диска и из репозитория.
+Переименуйте (переместите) файл will_be_moved.txt на диске и в репозитории, чтобы он стал называться has_been_moved.txt.
+Закоммитте результат работы с комментарием Moved and deleted.
+Проверка изменений.
+
+В результате предыдущих шагов в репозитории должно быть как минимум пять коммитов (если вы еще сделали какие-нибудь промежуточные – нет проблем):
+Initial Commit – созданный гитхабом при инициализации репозитория.
+First commit – созданный после изменения файла README.md.
+Added gitignore – после добавления .gitignore.
+Prepare to delete and move – после добавления двух временных файлов.
+Moved and deleted – после удаления и перемещения временных файлов.
+Проверьте это используя комманду git log (подробно о формате вывода этой команды мы поговорим на следующем занятии, но посмотреть что она отображает можно уже сейчас).
+Отправка изменений в репозиторий.
+git add has_been_moved.txt
+
+Выполните команду git push, если git запросит логин и пароль – введите ваш логин и пароль от github.
+В виде результата выполнения задания приложите ссылку на репозиторий.
+
+Username for 'https://github.com': Vladimir.Avdeev@rt.ru
+Password for 'https://Vladimir.Avdeev@rt.ru@github.com':
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: Authentication failed for 'https://github.com/AvdeevVK/devops-netology/'
+
+Задание №2 – Знакомство с документаций
+Один из основных навыков хорошего специалиста это уметь самостоятельно находить ответы на возникшие вопросы. 
+Чтобы начать знакомиться с документацией просто выполните в консоли команды git --help, git add --help и изучите их вывод.
+использование: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           [--super-prefix=<path>] [--config-env=<name>=<envvar>]
+           <command> [<args>]
+
+Стандартные команды Git используемые в различных ситуациях:
+
+создание рабочей области (смотрите также: git help tutorial)
+   clone             Клонирование репозитория в новый каталог
+   init              Создание пустого репозитория Git или переинициализация существующего
+
+работа с текущими изменениями (смотрите также: git help everyday)
+   add               Добавление содержимого файла в индекс
+   mv                Перемещение или переименование файла, каталога или символьной ссылки
+   restore           Restore working tree files
+   rm                Удаление файлов из рабочего каталога и индекса
+   sparse-checkout   Initialize and modify the sparse-checkout
+
+просмотр истории и текущего состояния (смотрите также: git help revisions)
+   bisect            Выполнить двоичный поиск изменения, которое вносит ошибку
+   diff              Вывод разницы между коммитами, коммитом и рабочим каталогом и т.д.
+   grep              Вывод строк, соответствующих шаблону
+   log               Вывод истории коммитов
+   show              Вывод различных типов объектов
+   status            Вывод состояния рабочего каталога
+
+выращивание, отметка и настройка вашей общей истории
+   branch            Вывод списка веток,  их создание или удаление
+   commit            Запись изменений в репозиторий
+   merge             Объединение одной или нескольких историй разработки вместе
+   rebase            Повторно применить коммиты над верхушкой другой ветки
+   reset             Сброс текущего состояния HEAD на указанное состояние
+   switch            Switch branches
+   tag               Создание метки, вывод списка, удаление или проверка метки, подписанной с помощью GPG
+
+совместная работа (смотрите также: git help workflows)
+   fetch             Загрузка объектов и ссылок из другого репозитория
+   pull              Извлечение изменений и объединение с другим репозиторием или локальной веткой
+   push              Обновление внешних ссылок и связанных объектов
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+
+
+использование: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           [--super-prefix=<path>] [--config-env=<name>=<envvar>]
+           <command> [<args>]
+
+Стандартные команды Git используемые в различных ситуациях:
+
+создание рабочей области (смотрите также: git help tutorial)
+   clone             Клонирование репозитория в новый каталог
+   init              Создание пустого репозитория Git или переинициализация существующего
+
+работа с текущими изменениями (смотрите также: git help everyday)
+   add               Добавление содержимого файла в индекс
+   mv                Перемещение или переименование файла, каталога или символьной ссылки
+   restore           Restore working tree files
+   rm                Удаление файлов из рабочего каталога и индекса
+   sparse-checkout   Initialize and modify the sparse-checkout
+
+просмотр истории и текущего состояния (смотрите также: git help revisions)
+   bisect            Выполнить двоичный поиск изменения, которое вносит ошибку
+   diff              Вывод разницы между коммитами, коммитом и рабочим каталогом и т.д.
+   grep              Вывод строк, соответствующих шаблону
+   log               Вывод истории коммитов
+   show              Вывод различных типов объектов
+   status            Вывод состояния рабочего каталога
+
+выращивание, отметка и настройка вашей общей истории
+   branch            Вывод списка веток,  их создание или удаление
+   commit            Запись изменений в репозиторий
+   merge             Объединение одной или нескольких историй разработки вместе
+   rebase            Повторно применить коммиты над верхушкой другой ветки
+   reset             Сброс текущего состояния HEAD на указанное состояние
+   switch            Switch branches
+   tag               Создание метки, вывод списка, удаление или проверка метки, подписанной с помощью GPG
+
+совместная работа (смотрите также: git help workflows)
+   fetch             Загрузка объектов и ссылок из другого репозитория
+   pull              Извлечение изменений и объединение с другим репозиторием или локальной веткой
+   push              Обновление внешних ссылок и связанных объектов
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+root@avk-VirtualBox:~/git02_clone# ^C
+root@avk-VirtualBox:~/git02_clone# git add --help
+GIT-ADD(1)                                                                     Git Manual                                                                    GIT-ADD(1)
+
+NAME
+       git-add - Add file contents to the index
+
+SYNOPSIS
+       git add [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] [--patch | -p]
+                 [--edit | -e] [--[no-]all | --[no-]ignore-removal | [--update | -u]]
+                 [--intent-to-add | -N] [--refresh] [--ignore-errors] [--ignore-missing] [--renormalize]
+                 [--chmod=(+|-)x] [--pathspec-from-file=<file> [--pathspec-file-nul]]
+                 [--] [<pathspec>...]
+
+DESCRIPTION
+       This command updates the index using the current content found in the working tree, to prepare the content staged for the next commit. It typically adds the
+       current content of existing paths as a whole, but with some options it can also be used to add content with only part of the changes made to the working tree
+       files applied, or remove paths that do not exist in the working tree anymore.
+
+       The "index" holds a snapshot of the content of the working tree, and it is this snapshot that is taken as the contents of the next commit. Thus after making any
+       changes to the working tree, and before running the commit command, you must use the add command to add any new or modified files to the index.
+
+       This command can be performed multiple times before a commit. It only adds the content of the specified file(s) at the time the add command is run; if you want
+       subsequent changes included in the next commit, then you must run git add again to add the new content to the index.
+
+       The git status command can be used to obtain a summary of which files have changes that are staged for the next commit.
+
+       The git add command will not add ignored files by default. If any ignored files were explicitly specified on the command line, git add will fail with a list of
+       ignored files. Ignored files reached by directory recursion or filename globbing performed by Git (quote your globs before the shell) will be silently ignored.
+       The git add command can be used to add ignored files with the -f (force) option.
+
+       Please see git-commit(1) for alternative ways to add content to a commit.
+
+OPTIONS
+       <pathspec>...
+           Files to add content from. Fileglobs (e.g.  *.c) can be given to add all matching files. Also a leading directory name (e.g.  dir to add dir/file1 and
+           dir/file2) can be given to update the index to match the current state of the directory as a whole (e.g. specifying dir will record not just a file
+           dir/file1 modified in the working tree, a file dir/file2 added to the working tree, but also a file dir/file3 removed from the working tree). Note that
+           older versions of Git used to ignore removed files; use --no-all option if you want to add modified or new files but ignore removed ones.
+
+           For more details about the <pathspec> syntax, see the pathspec entry in gitglossary(7).
+
+       -n, --dry-run
+           Don’t actually add the file(s), just show if they exist and/or will be ignored.
+
+       -v, --verbose
+           Be verbose.
+
+       -f, --force
+           Allow adding otherwise ignored files.
