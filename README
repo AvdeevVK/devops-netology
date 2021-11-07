@@ -109,12 +109,40 @@ https://github.com/AvdeevVK/devops-netology/blob/main/netology.tf
 Закоммитте результат работы с комментарием Moved and deleted.
 Проверка изменений.
 
+Проверка изменений.
+
 В результате предыдущих шагов в репозитории должно быть как минимум пять коммитов (если вы еще сделали какие-нибудь промежуточные – нет проблем):
 Initial Commit – созданный гитхабом при инициализации репозитория.
 First commit – созданный после изменения файла README.md.
 Added gitignore – после добавления .gitignore.
 Prepare to delete and move – после добавления двух временных файлов.
 Moved and deleted – после удаления и перемещения временных файлов.
+Проверьте это используя комманду git log (подробно о формате вывода этой команды мы поговорим на следующем занятии, но посмотреть что она отображает можно уже сейчас).
+commit e00be61cba621aad6c37ea857319b2d7edaad544 (HEAD -> main)
+Author: AvdeevVK vladimir.avdeev@rt.ru
+Date: 07 November, Sunday, 13:00:44 2021 +0300
+
+Moved and deleted  
+commit 23065dd4b20800cf313cfaa4ed8952d17d08c906
+Author: AvdeevVK vladimir.avdeev@rt.ru
+Date: 07 November, Sunday, 13:02:13 2021 +0300
+
+Prepare to delete and move  
+commit 8b7f83f4c36a7320e772f11f8163e69ef2a727ff
+Author: AvdeevVK vladimir.avdeev@rt.ru
+Date: 07 November, Sunday, 12:54:28 2021 +0300
+
+Added gitignore  
+commit 64bf7cdc4d46f626326845ceb4c4d06dfc61f54e
+Author: AvdeevVK vladimir.avdeev@rt.ru
+Date: 07 November, Sunday, 13:17:18 2021 +0300
+
+First commit  
+commit 1d2b61c341b0d54cc03450fd76b49bd84f7e1af5 (origin/main, origin/HEAD)
+Author: AvdeevVK vladimir.avdeev@rt.ru
+Date: 07 November, Sunday, 12:49:05 2021 +0300
+
+Initial commit  
 Проверьте это используя комманду git log (подробно о формате вывода этой команды мы поговорим на следующем занятии, но посмотреть что она отображает можно уже сейчас).
 Отправка изменений в репозиторий.
 git add has_been_moved.txt
